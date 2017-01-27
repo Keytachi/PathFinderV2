@@ -41,7 +41,7 @@ public class SpellEffect {
     }
 
     @XmlAttribute
-    public Mechanic getEffect() {
+    public Mechanic getMechanic() {
         return effect;
     }
     @XmlAttribute

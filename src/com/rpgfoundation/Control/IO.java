@@ -21,12 +21,11 @@ public class IO {
     public static int inputInt()
     {
         Scanner input = new Scanner(System.in);
-
         try{
             int choice = input.nextInt();
             return choice;
         }catch(InputMismatchException e){
-            System.out.println("Choose again but with a integer!!!!");
+            System.out.println("Choose again but with an integer!!!!");
             return inputInt();
         }
     }

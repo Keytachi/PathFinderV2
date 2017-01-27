@@ -3,15 +3,12 @@ package com.rpgfoundation;
 import com.rpgfoundation.Character.Human;
 import com.rpgfoundation.Character.Person;
 import com.rpgfoundation.Control.BattleEngine;
-import com.rpgfoundation.Control.IO;
 import com.rpgfoundation.Gear.Weapon;
 import com.rpgfoundation.Secondary.Attribute;
 import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Modify.SpellHolder;
 import com.rpgfoundation.Secondary.Spell;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import com.rpgfoundation.Character.Person;
+import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Spell;
 
 /**
@@ -29,7 +30,7 @@ public class BattleEngine {
         {
             for(int i = 0; i < player.getBuffSystem().size(); i++)
             {
-                player.getBuffSystem().get(i).buffAfter(player);
+                buffAfter(player.getBuffSystem().get(i), characterList.get(i));
             }
         }
         if (player.getHealth() <= 0) {
@@ -54,11 +55,11 @@ public class BattleEngine {
 
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).getTeam() == Person.Side.ENEMY &&
-                    characterList.get(i).isNotStatus(Person.PersonStatus.DEAD)) {
+                    !characterList.get(i).isStatus(Person.PersonStatus.DEAD)) {
                 bad++;
             }
             if (characterList.get(i).getTeam() == Person.Side.PLAYER &&
-                    characterList.get(i).isNotStatus(Person.PersonStatus.DEAD)) {
+                    !characterList.get(i).isStatus(Person.PersonStatus.DEAD)) {
                 good++;
             }
         }
@@ -79,4 +80,65 @@ public class BattleEngine {
         }
         updateAfter();
     }
+
+    public static void applySpell(Person caster, Person target, Spell spell) {
+        for(SpellEffect effect : spell.getEffects())
+            switch(effect.getMechanic())
+            {
+                case DAMAGE:
+                    target.setCurrent_Health(target.getCurrent_Health() - caster.getAttribute().getStrength()*effect.getDamageModifier());
+                    IO.damageReport(caster,target,caster.getAttribute().getStrength()*effect.getDamageModifier());
+                    break;
+                case HEAL:
+                    break;
+                case BURN:
+                case CURSE:
+                    target.setBuffSystem(spell);
+                    effect.setDamageOverTime(caster.getAttribute().getIntellect() * effect.getDamageModifier());
+                    break;
+
+                case SLEEP:
+                    target.setStatus(Person.PersonStatus.SLEEP);
+                    target.setBuffSystem(spell);
+                    break;
+                case STUN:
+                    target.setStatus(Person.PersonStatus.STUN);
+                    target.setBuffSystem(spell);
+                    break;
+                case INCREASESTATS:
+                    break;
+                case DECREASESTATS:
+                    break;
+                default:
+            }
+    }
+    public static void buffAfter(Spell buff, Person player) {
+
+        switch(buff.getSpellEffect().getMechanic())
+        {
+            case BURN:
+            case CURSE:
+                player.setCurrent_Health(player.getCurrent_Health()-buff.getSpellEffect().getDamageOverTime());
+                spellEnding(player,buff);
+                break;
+            default:
+                spellEnding(player,buff);
+                break;
+        }
+
+    }
+
+    public static void spellEnding(Person player,Spell spell)
+    {
+        int turnLeft = spell.getSpellEffect().getDuration();
+        turnLeft--;
+        if(turnLeft == 0) {
+            player.getBuffSystem().remove(spell);
+            if (!player.isStatus(Person.PersonStatus.ALIVE)) {
+                player.setStatus(Person.PersonStatus.ALIVE);
+            }
+        }
+
+    }
+
 }

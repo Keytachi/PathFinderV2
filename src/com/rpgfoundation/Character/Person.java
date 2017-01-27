@@ -197,8 +197,5 @@ public class Person{
     public boolean isStatus(PersonStatus status) {
         return getStatus() == status;
     }
-    public boolean isNotStatus(PersonStatus status){
-        return getStatus() != status;
-    }
 
 }
