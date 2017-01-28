@@ -7,12 +7,12 @@
         <name>Charge</name>
         <description>Running in to the enemy gaining rage and stunning the enemy.</description>
         <manaCost>-10</manaCost>
-        <effects effect="DAMAGE" type="TARGET">
+        <effects mechanic="DAMAGE" type="TARGET">
             <coolDown>0</coolDown>
             <damageModifier>5</damageModifier>
             <duration>0</duration>
         </effects>
-        <effects effect="STUN" type="TARGET">
+        <effects mechanic="STUN" type="TARGET">
             <coolDown>0</coolDown>
             <damageModifier>0</damageModifier>
             <duration>1</duration>
@@ -25,7 +25,7 @@
         <name>Rend</name>
         <description>Striking the enemy and cause a bleed on the target</description>
         <manaCost>20</manaCost>
-        <effects effect="DAMAGE" type="TARGET">
+        <effects mechanic="DAMAGE" type="TARGET">
             <coolDown>0</coolDown>
             <damageModifier>6</damageModifier>
             <duration>0</duration>

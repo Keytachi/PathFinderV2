@@ -1,10 +1,7 @@
 package com.rpgfoundation.Secondary.Modify;
 
-import com.rpgfoundation.Secondary.Spell;
-
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 /**
  * Created by Brandon on 1/5/2017.
@@ -25,14 +22,14 @@ public class SpellEffect {
     private int damageModifier;
     private int damageOverTime;
 
-    protected Mechanic effect;
+    protected Mechanic mechanic;
     protected TargetType type;
 
-    public SpellEffect(int duration, int coolDown, int damageModifier, Mechanic effect, TargetType type) {
+    public SpellEffect(int duration, int coolDown, int damageModifier, Mechanic mechanic, TargetType type) {
         this.duration = duration;
         this.coolDown = coolDown;
         this.damageModifier = damageModifier;
-        this.effect = effect;
+        this.mechanic = mechanic;
         this.type = type;
     }
 
@@ -42,7 +39,7 @@ public class SpellEffect {
 
     @XmlAttribute
     public Mechanic getMechanic() {
-        return effect;
+        return mechanic;
     }
     @XmlAttribute
     public TargetType getType() {
@@ -58,8 +55,8 @@ public class SpellEffect {
     public void setDamageModifier(int damageModifier){
         this.damageModifier = damageModifier;
     }
-    public void setEffect(Mechanic effect) {
-        this.effect = effect;
+    public void setMechanic(Mechanic mechanic) {
+        this.mechanic = mechanic;
     }
 
 
@@ -74,10 +71,6 @@ public class SpellEffect {
     }
     public int getDamageOverTime(){
         return damageOverTime;
-    }
-
-    public void setType(TargetType type) {
-        this.type = type;
     }
     public void setDamageOverTime(int damageOverTime){
         this.damageOverTime = damageOverTime;

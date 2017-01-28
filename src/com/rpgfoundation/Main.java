@@ -41,7 +41,7 @@ public class Main {
         do {
             BattleEngine.descendingOrder();
             BattleEngine.characterTurn();
-        }while(BattleEngine.checker() != false);
+        }while(!BattleEngine.getGameOver());
 
     }
 

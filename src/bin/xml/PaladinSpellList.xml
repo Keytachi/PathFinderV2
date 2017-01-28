@@ -4,12 +4,7 @@
         <name>Judgement</name>
         <description>Sends a holy bolt at the caster's target</description>
         <manaCost>15</manaCost>
-        <effects effect="DAMAGE" type="TARGET">
-            <coolDown>0</coolDown>
-            <damageModifier>5</damageModifier>
-            <duration>0</duration>
-        </effects>
-        <effects effect="BURN" type="TARGET">
+        <effects mechanic="BURN" type="TARGET">
             <coolDown>0</coolDown>
             <damageModifier>2</damageModifier>
             <duration>2</duration>
@@ -22,7 +17,7 @@
         <name>Holy Light</name>
         <description>Calls down a beam of light to heal the caster's target</description>
         <manaCost>20</manaCost>
-        <effects effect="HEAL" type="TARGET">
+        <effects mechanic="HEAL" type="TARGET">
             <coolDown>0</coolDown>
             <damageModifier>6</damageModifier>
             <duration>0</duration>

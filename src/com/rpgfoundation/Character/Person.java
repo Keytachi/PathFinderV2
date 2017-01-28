@@ -198,4 +198,7 @@ public class Person{
         return getStatus() == status;
     }
 
+    public boolean isTeam(Side side) {
+        return getTeam() == side;
+    }
 }
