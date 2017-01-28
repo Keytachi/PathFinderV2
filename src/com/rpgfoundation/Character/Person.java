@@ -15,6 +15,7 @@ import java.util.Random;
 
 /**
  * Created by Brandon on 1/1/2017.
+ * Done
  */
 public class Person{
 
