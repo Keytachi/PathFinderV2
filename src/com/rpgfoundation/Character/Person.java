@@ -7,6 +7,8 @@ import com.rpgfoundation.JobType.JobType;
 import com.rpgfoundation.JobType.Paladin;
 import com.rpgfoundation.JobType.Warrior;
 import com.rpgfoundation.Secondary.Attribute;
+import com.rpgfoundation.Secondary.Inventory;
+import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Spell;
 
 import java.io.File;
@@ -62,14 +64,15 @@ public class Person{
             return VALUES[RANDOM.nextInt(SIZE)];
         }
     }
-    public static enum ResourceType{
+    public enum ResourceType{
         MANA,
         RAGE,
         ENERGY;
     }
 
     private ArrayList<Spell> spells = new ArrayList<>();
-    private ArrayList<Spell> buffSystem = new ArrayList<>();
+    private ArrayList<SpellEffect> buffSystem = new ArrayList<>();
+    private ArrayList<Inventory> bag = new ArrayList<>();
 
     protected PersonStatus status;
     protected Side team;
@@ -156,7 +159,7 @@ public class Person{
         return jobType;
     }
     public ArrayList<Spell> getSpell(){ return spells;}
-    public ArrayList<Spell> getBuffSystem(){
+    public ArrayList<SpellEffect> getBuffSystem(){
         return buffSystem;
     }
 
@@ -175,7 +178,7 @@ public class Person{
     public void setStatus(PersonStatus status) {
         this.status = status;
     }
-    public void setBuffSystem(Spell spell)
+    public void setBuffSystem(SpellEffect spell)
     {
         this.buffSystem.add(spell);
     }

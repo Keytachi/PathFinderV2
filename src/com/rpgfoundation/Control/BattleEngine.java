@@ -103,16 +103,16 @@ public class BattleEngine {
                     break;
                 case BURN:
                 case CURSE:
-                    target.setBuffSystem(spell);
+                    target.setBuffSystem(effect);
                     effect.setDamageOverTime(caster.getAttribute().getIntellect() * effect.getDamageModifier());
                     break;
                 case SLEEP:
                     target.setStatus(Person.PersonStatus.SLEEP);
-                    target.setBuffSystem(spell);
+                    target.setBuffSystem(effect);
                     break;
                 case STUN:
                     target.setStatus(Person.PersonStatus.STUN);
-                    target.setBuffSystem(spell);
+                    target.setBuffSystem(effect);
                     break;
                 case INCREASESTATS:
                     break;
@@ -121,18 +121,16 @@ public class BattleEngine {
                 default:
             }
     }
-    public static void buffAfter(Spell buff, Person player) {
-
-        for(SpellEffect buffHolder : buff.getEffects())
-        switch(buffHolder.getMechanic())
+    public static void buffAfter(SpellEffect buff, Person player) {
+        switch(buff.getMechanic())
         {
             case BURN:
             case CURSE:
-                player.setCurrent_Health(player.getCurrent_Health()-buffHolder.getDamageOverTime());
-                spellEnding(player,buffHolder);
+                player.setCurrent_Health(player.getCurrent_Health()-buff.getDamageOverTime());
+                spellEnding(player,buff);
                 break;
             default:
-                spellEnding(player,buffHolder);
+                spellEnding(player,buff);
                 break;
         }
 
