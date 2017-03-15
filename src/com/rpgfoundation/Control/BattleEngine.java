@@ -26,7 +26,7 @@ public class BattleEngine {
     }   //Function to sort it descending the arrayList via dexterity value
 
     public static boolean getGameOver(){
-        return gameOver;
+        return gameOver == true;
     }
 
     private static void setGameOver(boolean state){
@@ -44,17 +44,17 @@ public class BattleEngine {
         if (player.getHealth() <= 0) {
             player.setStatus(Person.PersonStatus.DEAD);
         }
-        for(int i = 0; i < characterList.size(); i++) {
-            if(checker(characterList.get(i).getTeam()))
-            {
-                System.out.println(characterList.get(i).getTeam() + " wins!");
-                System.exit(0);
-            }
+        if(checker(player.getTeam()))
+        {
+            System.out.println(player.getTeam() + " wins!");
+            System.exit(0);
         }
 
     }
 
     public static void updateAfter() {
+     //Function is to detect if there are any characters that has flee.
+     //If character did flee, it will remove from the list.
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).isStatus(Person.PersonStatus.FLEE)) {
                 characterList.remove(characterList.get(i));
@@ -76,8 +76,9 @@ public class BattleEngine {
         return getGameOver();
     }
 
-    //Display the order that the special sorting function via dexterity value.
+
     public static void characterTurn() {
+    //Display the order that the special sorting function via dexterity value.
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).isStatus(Person.PersonStatus.DEAD) ||
                     characterList.get(i).isStatus(Person.PersonStatus.STUN)) {
@@ -100,6 +101,10 @@ public class BattleEngine {
                             caster.getAttribute().getStrength()*effect.getDamageModifier());
                     break;
                 case HEAL:
+                    target.setCurrent_Health(target.getCurrent_Health() + caster.getAttribute().getIntellect()
+                    *effect.getDamageModifier());
+                    if(target.getCurrent_Health() > target.getHealth())
+                        target.setCurrent_Health(target.getHealth());
                     break;
                 case BURN:
                 case CURSE:
@@ -115,8 +120,8 @@ public class BattleEngine {
                     target.setBuffSystem(effect);
                     break;
                 case INCREASESTATS:
-                    break;
                 case DECREASESTATS:
+                    target.setBuffSystem(effect);
                     break;
                 default:
             }

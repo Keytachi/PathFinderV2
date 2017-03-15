@@ -1,11 +1,12 @@
 package com.rpgfoundation.Gear;
 
 import com.rpgfoundation.Secondary.Attribute;
+import com.rpgfoundation.Secondary.Inventory;
 
 /**
  * Created by Brandon on 1/1/2017.
  */
-public class Armor{
+public class Armor extends Inventory{
     private String name;
     private int armor;
 

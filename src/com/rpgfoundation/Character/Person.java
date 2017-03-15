@@ -8,6 +8,7 @@ import com.rpgfoundation.JobType.Paladin;
 import com.rpgfoundation.JobType.Warrior;
 import com.rpgfoundation.Secondary.Attribute;
 import com.rpgfoundation.Secondary.Inventory;
+import com.rpgfoundation.Secondary.Modify.InventoryItem;
 import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Spell;
 
@@ -30,7 +31,7 @@ public class Person{
     private String name;
 
 
-    public static enum PersonStatus{
+    public enum PersonStatus{
         ALIVE,
         DEAD,
         SLEEP,
@@ -38,7 +39,7 @@ public class Person{
         FLEE,
         STUN;
     }
-    public static enum Side{
+    public enum Side{
         PLAYER,
         ENEMY;
 
@@ -51,7 +52,7 @@ public class Person{
             return VALUES[RANDOM.nextInt(SIZE)];
         }
     }
-    public static enum ClassRole{
+    public enum ClassRole{
         PALADIN,
         WARRIOR;
 
@@ -72,7 +73,7 @@ public class Person{
 
     private ArrayList<Spell> spells = new ArrayList<>();
     private ArrayList<SpellEffect> buffSystem = new ArrayList<>();
-    private ArrayList<Inventory> bag = new ArrayList<>();
+
 
     protected PersonStatus status;
     protected Side team;
@@ -84,7 +85,7 @@ public class Person{
     private Attribute attribute;
     private Weapon weapon;
     private Armor armor;
-    private Spell spell;
+    private Inventory bag;
 
     public Person(String name,int level,Weapon weapon,Side team, ClassRole specialty) {
         this.name = name;
@@ -94,6 +95,7 @@ public class Person{
         this.team = team;
         this.specialty = specialty;
         this.weapon = weapon;
+        this.bag = new Inventory();
         switch(specialty)
         {
             case PALADIN:
@@ -161,6 +163,9 @@ public class Person{
     public ArrayList<Spell> getSpell(){ return spells;}
     public ArrayList<SpellEffect> getBuffSystem(){
         return buffSystem;
+    }
+    public Inventory getBag(){
+        return bag;
     }
 
     public void setResource(int resource) {

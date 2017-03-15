@@ -5,6 +5,8 @@ import com.rpgfoundation.Character.Person;
 import com.rpgfoundation.Control.BattleEngine;
 import com.rpgfoundation.Gear.Weapon;
 import com.rpgfoundation.Secondary.Attribute;
+import com.rpgfoundation.Secondary.Inventory;
+import com.rpgfoundation.Secondary.Modify.InventoryItem;
 import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Modify.SpellHolder;
 import com.rpgfoundation.Secondary.Spell;
@@ -32,7 +34,18 @@ public class Main {
         spells.getSpellSet().add(testingList2);
 
         IO.createFile(spells);*/
-        game();
+        //game();
+
+
+        int npcGenerate = 3;
+        Weapon testWep = new Weapon( 2, InventoryItem.Stackable.NO,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9));
+        Person[] characterNumber = new Person[npcGenerate];
+        for(int i = 0; i < npcGenerate; i++)
+        {
+            characterNumber[i] = new Human("NPC " + (i + 1), 1,testWep, Person.Side.getRandomSide(),
+                    Person.ClassRole.getRandomRole());
+            characterNumber[i].getBag().addItem(testWep);
+        }
     }
 
     public static void game()
@@ -47,7 +60,7 @@ public class Main {
 
     public static void createPlayer()   //Generating random character for testing purpose
     {
-        Weapon testWep = new Weapon(2,5,2.6, new Attribute(0,0,0,0,0,0));
+        Weapon testWep = new Weapon( 2, InventoryItem.Stackable.NO,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9));
         //Test Weapon
         int npcGenerate = 3; //(int)(Math.random()*10)+2;
         // From the range of 2-12 since it can randomly only do 1 character at a time.
