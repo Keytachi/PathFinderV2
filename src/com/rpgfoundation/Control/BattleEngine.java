@@ -28,11 +28,9 @@ public class BattleEngine {
     public static boolean getGameOver(){
         return gameOver;
     }
-
     private static void setGameOver(boolean state){
         gameOver = state;
     }
-
     public static void turnEnd(Person player) {
         if(!player.getBuffSystem().isEmpty())
         {
@@ -53,7 +51,6 @@ public class BattleEngine {
         }
 
     }
-
     public static void updateAfter() {
         for (int i = 0; i < characterList.size(); i++) {
             if (characterList.get(i).isStatus(Person.PersonStatus.FLEE)) {
@@ -61,7 +58,6 @@ public class BattleEngine {
             }
         }
     }
-
     public static boolean checker(Person.Side side) {
     //This function will be use to check to see if the game is over or not.
     //This will depend if there are any more players on an opposing team.
@@ -75,7 +71,6 @@ public class BattleEngine {
         setGameOver(opposing == 0);
         return getGameOver();
     }
-
     //Display the order that the special sorting function via dexterity value.
     public static void characterTurn() {
         for (int i = 0; i < characterList.size(); i++) {
@@ -88,7 +83,6 @@ public class BattleEngine {
         }
         updateAfter();
     }
-
     public static void applySpell(Person caster, Person target, Spell spell) {
         for(SpellEffect effect : spell.getEffects())
             switch(effect.getMechanic())
@@ -137,7 +131,6 @@ public class BattleEngine {
         }
 
     }
-
     public static void spellEnding(Person player,SpellEffect spell)
     {
         int turnLeft = spell.getDuration();
