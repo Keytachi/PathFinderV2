@@ -1,7 +1,6 @@
 package com.rpgfoundation.Character;
 
-import com.rpgfoundation.Gear.Weapon;
-import com.rpgfoundation.Secondary.Attribute;
+import com.rpgfoundation.Inventory.Weapon;
 
 /**
  * Created by Brandon on 1/1/2017.

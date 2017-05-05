@@ -1,14 +1,13 @@
 package com.rpgfoundation.Character;
 import com.rpgfoundation.Control.BattleEngine;
 import com.rpgfoundation.Control.IO;
-import com.rpgfoundation.Gear.Armor;
-import com.rpgfoundation.Gear.Weapon;
+import com.rpgfoundation.Inventory.Armor;
+import com.rpgfoundation.Inventory.Weapon;
 import com.rpgfoundation.JobType.JobType;
 import com.rpgfoundation.JobType.Paladin;
 import com.rpgfoundation.JobType.Warrior;
 import com.rpgfoundation.Secondary.Attribute;
 import com.rpgfoundation.Secondary.Inventory;
-import com.rpgfoundation.Secondary.Modify.InventoryItem;
 import com.rpgfoundation.Secondary.Modify.SpellEffect;
 import com.rpgfoundation.Secondary.Spell;
 
@@ -73,6 +72,7 @@ public class Person{
 
     private ArrayList<Spell> spells = new ArrayList<>();
     private ArrayList<SpellEffect> buffSystem = new ArrayList<>();
+    private Inventory bags = new Inventory();
 
 
     protected PersonStatus status;
@@ -95,7 +95,6 @@ public class Person{
         this.team = team;
         this.specialty = specialty;
         this.weapon = weapon;
-        this.bag = new Inventory();
         switch(specialty)
         {
             case PALADIN:
@@ -164,9 +163,10 @@ public class Person{
     public ArrayList<SpellEffect> getBuffSystem(){
         return buffSystem;
     }
-    public Inventory getBag(){
+    /**public Inventory getBagContent(){
         return bag;
-    }
+    }*/
+    public Inventory getBags() {return bags;}
 
     public void setResource(int resource) {
         this.resource = resource;

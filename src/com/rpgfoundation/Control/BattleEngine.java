@@ -140,7 +140,6 @@ public class BattleEngine {
         }
 
     }
-
     public static void spellEnding(Person player,SpellEffect spell)
     {
         int turnLeft = spell.getDuration();

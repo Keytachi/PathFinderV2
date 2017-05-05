@@ -1,4 +1,4 @@
-package com.rpgfoundation.Gear;
+package com.rpgfoundation.Inventory;
 
 import com.rpgfoundation.Secondary.Attribute;
 import com.rpgfoundation.Secondary.Inventory;
@@ -6,7 +6,7 @@ import com.rpgfoundation.Secondary.Inventory;
 /**
  * Created by Brandon on 1/1/2017.
  */
-public class Armor extends Inventory{
+public class Armor extends Inventory {
     private String name;
     private int armor;
 

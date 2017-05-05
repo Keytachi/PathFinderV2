@@ -1,6 +1,7 @@
-package com.rpgfoundation.Gear;
+package com.rpgfoundation.Inventory;
 
 import com.rpgfoundation.Secondary.Attribute;
+import com.rpgfoundation.Secondary.Inventory;
 import com.rpgfoundation.Secondary.Modify.InventoryItem;
 
 /**
@@ -11,9 +12,10 @@ public class Weapon extends InventoryItem {
     private double weaponMin;
     private double weaponMax;
     private Attribute attribute;
+    private String name;
 
-    public Weapon(int itemWeight, Stackable itemStack, double weaponSpeed, double weaponMin, double weaponMax, Attribute attribute) {
-        super(itemWeight, itemStack);
+    public Weapon(int itemWeight, Stack itemStack, int count, double weaponSpeed, double weaponMin, double weaponMax, Attribute attribute, String name) {
+        super(itemWeight, itemStack, count,name);
         this.weaponSpeed = weaponSpeed;
         this.weaponMin = weaponMin;
         this.weaponMax = weaponMax;

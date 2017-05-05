@@ -74,7 +74,7 @@ public class IO {
         nameHeader(player);
         System.out.println("1. Attack");
         System.out.println("2. Spell");
-        System.out.println("3. Gear");
+        System.out.println("3. Inventory");
         System.out.println("4. Run");
         System.out.println("Choose your move: ");
 
@@ -85,8 +85,9 @@ public class IO {
                 break;
             case 2:                     //Will call the spell attack function base off the jobType.
                 player.getJobType().spell(player);
-                break;
-            case 3:                     //Gear System later on
+            break;
+            case 3:                     //Inventory System later on
+                inventoryCall(player);
                 break;
             case 4:                     //Run function
                 run(player);
@@ -104,7 +105,7 @@ public class IO {
         {
             System.out.println(i+1 + ". " + player.getSpell().get(i).getName());
         }
-
+        System.out.println("Please choose a spell: ");
         player.getSpell().get(inputInt()-1).cast(player,findTarget());
     }
     public static void nameHeader(Person player)
@@ -113,6 +114,17 @@ public class IO {
                 " - (HEALTH: " + player.getCurrent_Health() + "/" + player.getHealth() +
                 " | " + player.getResourceType() + ": " + player.getCurrent_Resource() +
                 "/" + player.getResource() + ")");
+    }
+
+    public static void inventoryCall(Person player)
+    {
+        IO.printHeader(player.getName() + " Inventory Items:");
+        for(int i = 0; i <player.getBags().getBagContent().size(); i++)
+        {
+            System.out.println(i+1 + ". " + player.getBags().getBagContent().get(i).getName());
+        }
+        System.out.println("Please choose an item: ");
+        player.getBags().getBagContent().get(inputInt()-1);
     }
 
 

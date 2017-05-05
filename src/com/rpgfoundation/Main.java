@@ -3,14 +3,11 @@ package com.rpgfoundation;
 import com.rpgfoundation.Character.Human;
 import com.rpgfoundation.Character.Person;
 import com.rpgfoundation.Control.BattleEngine;
-import com.rpgfoundation.Gear.Weapon;
+import com.rpgfoundation.Control.IO;
+import com.rpgfoundation.Inventory.Consumable;
+import com.rpgfoundation.Inventory.Weapon;
 import com.rpgfoundation.Secondary.Attribute;
-import com.rpgfoundation.Secondary.Inventory;
 import com.rpgfoundation.Secondary.Modify.InventoryItem;
-import com.rpgfoundation.Secondary.Modify.SpellEffect;
-import com.rpgfoundation.Secondary.Modify.SpellHolder;
-import com.rpgfoundation.Secondary.Spell;
-
 
 
 public class Main {
@@ -38,13 +35,21 @@ public class Main {
 
 
         int npcGenerate = 3;
-        Weapon testWep = new Weapon( 2, InventoryItem.Stackable.NO,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9));
+        Weapon testWep = new Weapon( 2, InventoryItem.Stack.NO, 1,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9), "Sword");
+        Consumable healthPotion = new Consumable (2, InventoryItem.Stack.YES, 4,"Health Potion", Consumable.TypesofPotion.HEALTH);
         Person[] characterNumber = new Person[npcGenerate];
         for(int i = 0; i < npcGenerate; i++)
         {
             characterNumber[i] = new Human("NPC " + (i + 1), 1,testWep, Person.Side.getRandomSide(),
                     Person.ClassRole.getRandomRole());
-            characterNumber[i].getBag().addItem(testWep);
+            System.out.println(characterNumber[i].getName());
+            for (int j = 0; j < 21; j++) {
+                characterNumber[i].getBags().addItem(testWep);
+                characterNumber[i].getBags().addItem(healthPotion);
+                characterNumber[i].getBags().getCurrent_BagUsage();
+            }
+            IO.inventoryCall(characterNumber[i]);
+            characterNumber[i].getBags().removeItem(testWep);
         }
     }
 
@@ -60,7 +65,7 @@ public class Main {
 
     public static void createPlayer()   //Generating random character for testing purpose
     {
-        Weapon testWep = new Weapon( 2, InventoryItem.Stackable.NO,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9));
+        Weapon testWep = new Weapon( 2, InventoryItem.Stack.NO, 1,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9),"Test Weapon");
         //Test Weapon
         int npcGenerate = 3; //(int)(Math.random()*10)+2;
         // From the range of 2-12 since it can randomly only do 1 character at a time.
