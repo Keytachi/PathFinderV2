@@ -90,6 +90,10 @@ public class BattleEngine {
         updateAfter();
     }
 
+    /**
+     * This section is for spells/buff system.
+     * Happens when casting/after turn/spell ending.
+     */
     public static void applySpell(Person caster, Person target, Spell spell) {
         for(SpellEffect effect : spell.getEffects())
             switch(effect.getMechanic())
@@ -140,8 +144,7 @@ public class BattleEngine {
         }
 
     }
-    public static void spellEnding(Person player,SpellEffect spell)
-    {
+    public static void spellEnding(Person player,SpellEffect spell) {
         int turnLeft = spell.getDuration();
         turnLeft--;
         spell.setDuration(turnLeft);
@@ -152,4 +155,9 @@ public class BattleEngine {
             }
         }
     }
+
+    // TODO: Need to create a function which the player can use their potions to restore a % of health or resources in
+    // TODO: a turn.
+    // TODO: Need to create a function which the player can equip and unequip weapon/armor base on a turn.
+
 }

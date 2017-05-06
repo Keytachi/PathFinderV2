@@ -12,9 +12,7 @@ public class Consumable extends InventoryItem {
         HEALTH,
         MANA,
     }
-    private String name;
     private TypesofPotion potions;
-    private int count;
 
     public Consumable(int itemweight, Stack stack, int count, String name, TypesofPotion potions)
     {
@@ -22,9 +20,6 @@ public class Consumable extends InventoryItem {
         this.potions = potions;
     }
 
-    public String getName() {
-        return name;
-    }
     public TypesofPotion getPotions() {
         return potions;
     }

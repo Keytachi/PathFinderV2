@@ -1,6 +1,7 @@
 package com.rpgfoundation.Secondary;
 
 
+import com.rpgfoundation.Control.IO;
 import com.rpgfoundation.Secondary.Modify.InventoryItem;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
  */
 public class Inventory{
 
+    //A container for the content of the inventory items
     private ArrayList<InventoryItem> bagContent = new ArrayList<>();
 
 
@@ -24,39 +26,35 @@ public class Inventory{
 
     public void addItem(InventoryItem o)
     {
+        InventoryItem a = ifExist(o);
         if (!(getCurrent_BagUsage() >= getMax_BagSpace()))
             {
-                System.out.println("Inventory added: " + o + " x" + o.getCount());
-                if(o.stack() == InventoryItem.Stack.YES && ifExist(o) )
+                if (o.isStack(InventoryItem.Stack.YES) && a != null)
                 {
-                    InventoryItem a = null;
-                    for(int j = 0; j < getBagContent().size(); j++)
-                    {
-                        if(o.getName() == getBagContent().get(j).getName())
-                        {
-                            a = getBagContent().get(j);
-                        }
-                    }
-                    a.setCount(a.getCount()+ o.getCount());
+                    a.setCount(a.getCount() + o.getCount());
                 }
-                else {
+                else
+                {
+                    a = (InventoryItem) o.clone();
                     setCurrent_BagUsage(getCurrent_BagUsage() + 1);
-                    bagContent.add(o);
+                    bagContent.add(a);
+                    IO.successAdd(a);
                 }
             }
         else
-                System.out.println("Bag is full");
+                IO.failAdd(o);
     }
 
     public void removeItem(InventoryItem o)
     {
-        if(ifExist(o))
+        InventoryItem a = ifExist(o);
+        if(a != null)
         {
-            bagContent.remove(o);
-            System.out.println("You have removed " + o + " from inventory");
+            bagContent.remove(a);
+            System.out.println("You have removed " + a + " from inventory");
         }
         else{
-            System.out.println(o + " is not in inventory");
+            System.out.println(a + " is not in inventory");
         }
 
     }
@@ -75,11 +73,14 @@ public class Inventory{
         return bagContent;
     }
 
-    public boolean ifExist(InventoryItem o)
+    public InventoryItem ifExist(InventoryItem o)
     {
-        for(int i = 0; i < getBagContent().size(); i++)
-            if(o.getName() == getBagContent().get(i).getName())
-                return true;
-        return false;
+        InventoryItem a;
+        for(int i = 0; i < getBagContent().size(); i++) {
+            a = getBagContent().get(i);
+                if (o.getName() == a.getName())
+                    return a;
+            }
+        return null;
     }
 }

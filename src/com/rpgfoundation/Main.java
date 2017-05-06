@@ -31,10 +31,10 @@ public class Main {
         spells.getSpellSet().add(testingList2);
 
         IO.createFile(spells);*/
-        //game();
+        game();
 
 
-        int npcGenerate = 3;
+        /*int npcGenerate = 3;
         Weapon testWep = new Weapon( 2, InventoryItem.Stack.NO, 1,2.6, 4.3, 4.7, new Attribute(5, 7, 2, 4, 8, 9), "Sword");
         Consumable healthPotion = new Consumable (2, InventoryItem.Stack.YES, 4,"Health Potion", Consumable.TypesofPotion.HEALTH);
         Person[] characterNumber = new Person[npcGenerate];
@@ -50,7 +50,7 @@ public class Main {
             }
             IO.inventoryCall(characterNumber[i]);
             characterNumber[i].getBags().removeItem(testWep);
-        }
+        }*/
     }
 
     public static void game()

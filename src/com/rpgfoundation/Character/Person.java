@@ -70,23 +70,26 @@ public class Person{
         ENERGY;
     }
 
+    //ArrayList of what a character can have.
     private ArrayList<Spell> spells = new ArrayList<>();
     private ArrayList<SpellEffect> buffSystem = new ArrayList<>();
-    private Inventory bags = new Inventory();
 
 
+    //Enum information about the player.
     protected PersonStatus status;
     protected Side team;
     protected ClassRole specialty;
     protected ResourceType resourceType;
     protected String title;
 
+    //Composition of other classes.
     private JobType jobType;
     private Attribute attribute;
     private Weapon weapon;
     private Armor armor;
-    private Inventory bag;
+    private Inventory bags = new Inventory();
 
+    //Constructor
     public Person(String name,int level,Weapon weapon,Side team, ClassRole specialty) {
         this.name = name;
         this.level = level;
@@ -120,6 +123,7 @@ public class Person{
         BattleEngine.characterList.add(this);
     }
 
+    //Basic getter for information of character.
     public String getName(){
         return name;
     }
@@ -139,6 +143,7 @@ public class Person{
         return current_Health;
     }
 
+    //Getters for more of the secondary information.
     public PersonStatus getStatus() {
         return status;
     }
@@ -151,8 +156,9 @@ public class Person{
     public ResourceType getResourceType(){
         return resourceType;
     }
+    public Inventory getBags() {return bags;}
 
-
+    //Getters for the information about their class.
     public Attribute getAttribute() {
         return attribute;
     }
@@ -163,11 +169,8 @@ public class Person{
     public ArrayList<SpellEffect> getBuffSystem(){
         return buffSystem;
     }
-    /**public Inventory getBagContent(){
-        return bag;
-    }*/
-    public Inventory getBags() {return bags;}
 
+    //Setters for the information of the basic stats.
     public void setResource(int resource) {
         this.resource = resource;
     }
@@ -210,4 +213,6 @@ public class Person{
     public boolean isTeam(Side side) {
         return getTeam() == side;
     }
+
+    //TODO: Figure out how to create slots for armor and weapons.
 }

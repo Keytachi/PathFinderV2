@@ -12,7 +12,6 @@ public class Weapon extends InventoryItem {
     private double weaponMin;
     private double weaponMax;
     private Attribute attribute;
-    private String name;
 
     public Weapon(int itemWeight, Stack itemStack, int count, double weaponSpeed, double weaponMin, double weaponMax, Attribute attribute, String name) {
         super(itemWeight, itemStack, count,name);

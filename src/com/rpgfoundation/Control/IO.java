@@ -1,6 +1,8 @@
 package com.rpgfoundation.Control;
 
 import com.rpgfoundation.Character.Person;
+import com.rpgfoundation.Secondary.Inventory;
+import com.rpgfoundation.Secondary.Modify.InventoryItem;
 import com.rpgfoundation.Secondary.Modify.SpellHolder;
 import com.rpgfoundation.Secondary.Spell;
 
@@ -18,6 +20,7 @@ import java.util.Scanner;
  */
 public class IO {
 
+    //Read inputs of the user to select an options.
     public static int inputInt()
     {
         Scanner input = new Scanner(System.in);
@@ -30,12 +33,15 @@ public class IO {
         }
     }
 
+    //Display using a header for smaller string variable.
     public static void printHeader(String s) {
         System.out.println("\n******************************\n" +
                 s +
                 "\n******************************");
 
     }
+
+    //Display using a header for names string variable.
     public static void printHeaderName(String s) {
         System.out.println("\n************************************************\n" +
                 s +
@@ -43,6 +49,7 @@ public class IO {
 
     }
 
+    //Display a list of character (Enemy or Team) and give the optioins of selecting with input to choose a target.
     public static Person findTarget() {
 
         IO.printHeader("Character List");
@@ -70,6 +77,7 @@ public class IO {
         }
     }
 
+    //Display what each characters options are.
     public static void actionChoice(Person player) {
         nameHeader(player);
         System.out.println("1. Attack");
@@ -98,6 +106,7 @@ public class IO {
         }
     }
 
+    //Display what is in the current arraylist for spells
     public static void spellCall(Person player)
     {
         IO.printHeader(player.getSpecialty() + " Moves Set");
@@ -108,6 +117,8 @@ public class IO {
         System.out.println("Please choose a spell: ");
         player.getSpell().get(inputInt()-1).cast(player,findTarget());
     }
+
+    //Display the character name/type of role their character are as a header.
     public static void nameHeader(Person player)
     {
         IO.printHeaderName(player.getName() + " - " + player.getSpecialty() +
@@ -116,18 +127,7 @@ public class IO {
                 "/" + player.getResource() + ")");
     }
 
-    public static void inventoryCall(Person player)
-    {
-        IO.printHeader(player.getName() + " Inventory Items:");
-        for(int i = 0; i <player.getBags().getBagContent().size(); i++)
-        {
-            System.out.println(i+1 + ". " + player.getBags().getBagContent().get(i).getName());
-        }
-        System.out.println("Please choose an item: ");
-        player.getBags().getBagContent().get(inputInt()-1);
-    }
-
-
+    //Display the calculation of the damage report.
     public static void damageReport(Person player, Person target, int damage)
     {
         System.out.println(target.getName() + " Health Pool is: " + target.getHealth());
@@ -154,18 +154,48 @@ public class IO {
         else System.out.println(target.getName() + " remaining health is: " + target.getCurrent_Health());
     }
 
+    /**
+     * This section is for Output of a character status if they are dead or fleeing.
+     */
     public static void deathSetter(Person target)
     {
         System.out.println(target.getName() + " has died");
         target.setStatus(Person.PersonStatus.DEAD);
     }
-
     public static void run(Person player) {
         System.out.println(player.getName() + " has flee");
         player.setStatus(Person.PersonStatus.FLEE);
     }
 
+    /**
+     * This section is for Inventory/Inventory Items IO/Output
+     */
+    public static void successAdd(InventoryItem o)
+    {
+        System.out.println(o + " has been added to inventory.");
+    }
+    public static void failAdd(InventoryItem o)
+    {
+        System.out.println(o + " has fail to be added to inventory.");
+    }
+    public static void inventoryCall(Person player)
+    {
+        IO.printHeader(player.getName() + " Inventory Items:");
+        for(int i = 0; i <player.getBags().getBagContent().size(); i++) {
+            if (player.getBags().getBagContent().get(i).isStack(InventoryItem.Stack.YES))
+                System.out.println(i + 1 + ". " + player.getBags().getBagContent().get(i).getName() + " x" +
+                        player.getBags().getBagContent().get(i).getCount());
+            else
+                System.out.println(i + 1 + ". " + player.getBags().getBagContent().get(i).getName());
+        }
+        System.out.println("Please choose an item: ");
+        player.getBags().getBagContent().get(inputInt()-1);
+    }
 
+    /**
+     * This section is for testing purpose of creating spells and reading spell to be place into an arraylist.
+     * Use to understand how the code will pick up through XML.
+     */
     public static ArrayList<Spell> readFile(File files,ArrayList<Spell> mainList)
     {
         try {

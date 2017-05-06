@@ -3,7 +3,7 @@ package com.rpgfoundation.Secondary.Modify;
 /**
  * Created by Brandon on 2/22/2017.
  */
-public class InventoryItem {
+public class InventoryItem implements Cloneable {
     public enum Stack {
         YES,
         NO
@@ -25,7 +25,7 @@ public class InventoryItem {
         return name;
     }
 
-    public Stack stack() {return itemStack;}
+    public Stack getItemStackstack() {return itemStack;}
 
     public int getCount() {
         return count;
@@ -37,5 +37,21 @@ public class InventoryItem {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Object clone()
+    {
+        try {
+            return super.clone();
+        }catch (CloneNotSupportedException e)
+        {
+            throw new Error("Something went wrong");
+        }
+    }
+
+    public boolean isStack(Stack stack)
+    {
+        return getItemStackstack() == stack;
     }
 }
